@@ -6,14 +6,14 @@ const forecast = (latitude, longitude, callback) => {
     const key = process.env.WEATHER_STACK_ACCESS_KEY
     const url = `http://api.weatherstack.com/current?access_key=${key}&query=${latitude},${longitude}`
 
-    request({ url: url, json: true }, (error, response) => {
+    request({ url, json: true }, (error, { body }) => {
         if (error) {
             callback('Unable to connect to weather service!', undefined)
-        } else if (response.body.error) {
+        } else if (body.error) {
             callback('Unable to find location', undefined)
         } else {
-            const data = response.body.current
-            callback(undefined, `${data.weather_descriptions[0]} throughout the day. It is currently ${data.temperature} degrees out. There is a ${data.precip}% chance of rain.`)
+            const {weather_descriptions, temperature, precip} = body.current
+            callback(undefined, `${weather_descriptions[0]} throughout the day. It is currently ${temperature} degrees out. There is a ${precip}% chance of rain.`)
         }
     })
 }
