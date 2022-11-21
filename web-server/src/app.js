@@ -19,19 +19,22 @@ app.use(express.static(publicDirectoryPath))
 
 app.get('', (req, res) => {
     res.render('index', {
-        title: 'Weather App'
+        title: 'Weather App',
+        name: 'Kristen Ingelman'
     })
 })
 
 app.get('/about', (req, res) => {
     res.render('about', {
-        title: 'About Me'
+        title: 'About Me',
+        name: 'Kristen Ingelman'
     })
 })
 
 app.get('/help', (req, res) => {
     res.render('help', {
         title: 'Help',
+        name : 'Kristen Ingelman',
         message: 'This is some helpful text :) '
     })
 })
@@ -45,14 +48,15 @@ app.get('/weather', (req, res) => {
 
 app.get('/help/*', (req, res) => {
     res.render('404', {
-        errorMessage: 'Help article not found!'
+        errorMessage: 'Help article not found!',
+        name: 'Kristen Ingelman'
     })
 })
 
-// must have this route listed last
 app.get('*', (req, res) => {
     res.render('404', {
-        errorMessage: 'Page not found!'
+        errorMessage: 'Page not found!',
+        name: 'Kristen Ingelman'
     })
 })
 
