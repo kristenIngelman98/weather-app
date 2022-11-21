@@ -19,15 +19,13 @@ app.use(express.static(publicDirectoryPath))
 
 app.get('', (req, res) => {
     res.render('index', {
-        title: 'Weather App',
-        name: 'Kristen Ingelman'
+        title: 'Weather App'
     })
 })
 
 app.get('/about', (req, res) => {
     res.render('about', {
-        title: 'About Me',
-        name: 'Kristen Ingelman'
+        title: 'About Me'
     })
 })
 
@@ -44,6 +42,20 @@ app.get('/weather', (req, res) => {
         location: 'Victoria, BC'
     })
 })
+
+app.get('/help/*', (req, res) => {
+    res.render('404', {
+        errorMessage: 'Help article not found!'
+    })
+})
+
+// must have this route listed last
+app.get('*', (req, res) => {
+    res.render('404', {
+        errorMessage: 'Page not found!'
+    })
+})
+
 app.listen(3000, () => {
     console.log('Server running on port 3000')
 })
